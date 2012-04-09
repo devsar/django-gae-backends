@@ -1,0 +1,19 @@
+A collection a django backends for the Google App Engine
+
+Features:
+- memcache/datastore session backend
+
+TODO:
+- file storage base in the Google Cloud Storage
+- email backend
+
+
+Setup
+=====
+
+- session backend:
+  Add to the settings.py the following line:
+
+SESSION_ENGINE = "gae_backends.sessions.cached_db"
+
+
