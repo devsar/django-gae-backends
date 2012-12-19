@@ -5,15 +5,17 @@ Features:
 
 TODO:
 - file storage base in the Google Cloud Storage
-- email backend
+
 
 
 Setup
 =====
-
-- session backend:
-  Add to the settings.py the following line:
+Add to the settings.py the following lines to install the backends:
 
 SESSION_ENGINE = "gae_backends.sessions.cached_db"
-
-
+EMAIL_BACKEND = "gae_backends.mail.EmailBackend"
+CACHES = {
+    'default': {
+        'BACKEND': 'gae_backends.memcache.MemcacheCache',
+    }
+}
