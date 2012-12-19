@@ -2,11 +2,11 @@ A collection a django backends for the Google App Engine
 
 Features:
 - memcache/datastore session backend
+- email backend
+- cache backend
 
 TODO:
 - file storage base in the Google Cloud Storage
-
-
 
 Setup
 =====
