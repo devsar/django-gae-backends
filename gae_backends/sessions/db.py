@@ -33,7 +33,11 @@ class SessionStore(base.SessionBase):
       except SuspiciousOperation:
         # Create a new session_key for extra security.
         pass
-    self.session_key = self._get_new_session_key()
+    if hasattr(self, '_session_key'):
+        self._session_key = self._get_new_session_key()
+    else:
+        self.session_key = self._get_new_session_key()
+
     self._session_cache = {}
     self.save()
     # Ensure the user is notified via a new cookie.
@@ -69,7 +73,11 @@ class SessionStore(base.SessionBase):
 
   def create(self):
     while True:
-      self.session_key = self._get_new_session_key()
+      if hasattr(self, '_session_key'):
+        self._session_key = self._get_new_session_key()
+      else:
+        self.session_key = self._get_new_session_key()
+
       try:
         # Save immediately to ensure we have a unique entry in the
         # database.
