@@ -4,6 +4,7 @@ Features:
 - memcache/datastore session backend
 - email backend
 - cache backend
+- rdbms for migrations
 
 TODO:
 - file storage base in the Google Cloud Storage
@@ -19,3 +20,19 @@ CACHES = {
         'BACKEND': 'gae_backends.memcache.MemcacheCache',
     }
 }
+
+if os.getenv('SETTINGS_MODE') == 'prod':
+    # Running in development, but want to access the Google Cloud SQL instance
+    # in production.
+    DATABASES = {
+        'default': {
+            'ENGINE': 'gae_backends.rdbms',
+            'INSTANCE': 'your_instance:your_db',
+            'NAME': '....',
+            'USER': '....',
+            'OPTIONS': {
+                'init_command': 'SET storage_engine=INNODB',
+            }
+        }
+    }
+
