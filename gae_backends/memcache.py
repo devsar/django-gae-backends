@@ -1,9 +1,9 @@
 """
   Django Cache Backend for the Google App Engine
 """
+import time
 
 from django.core.cache.backends.base import BaseCache
-from django.utils.hashcompat import md5_constructor
 
 from google.appengine.api import memcache
 

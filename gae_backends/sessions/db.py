@@ -48,9 +48,10 @@ class SessionStore(base.SessionBase):
     if must_create and self.exists(self.session_key):
       raise base.CreateError
     session = Session(
-        key_name='k:' + self.session_key,
-        session_data = self.encode(self._session),
-        expire_date = self.get_expiry_date())
+        key_name='k:' + self._get_or_create_session_key(),
+        session_data = str(self.encode(self._session)),
+        expire_date = self.get_expiry_date()
+    )
     session.put()
 
   def exists(self, session_key):
