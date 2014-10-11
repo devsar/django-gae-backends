@@ -261,6 +261,7 @@ class DatabaseWrapper(base.DatabaseWrapper):
                     "You must specify a '%s' for database '%s'" %
                     (settings_key, self.alias))
             self.connection = Connect(**kwargs)
+            self.set_autocommit(self.settings_dict['AUTOCOMMIT'])
             encoders = {safestring.SafeUnicode: self.connection.encoders[unicode],
                         safestring.SafeString: self.connection.encoders[str]}
             self.connection.encoders.update(encoders)
